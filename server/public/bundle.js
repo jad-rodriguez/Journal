@@ -1,16 +1,17 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./client/api.js":
-/*!***********************!*\
-  !*** ./client/api.js ***!
-  \***********************/
+/***/ "./client/api/index.js":
+/*!*****************************!*\
+  !*** ./client/api/index.js ***!
+  \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getQuotes": () => (/* binding */ getQuotes)
+/* harmony export */   "getQuotes": () => (/* binding */ getQuotes),
+/* harmony export */   "getAllJournalPosts": () => (/* binding */ getAllJournalPosts)
 /* harmony export */ });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
@@ -18,6 +19,11 @@ __webpack_require__.r(__webpack_exports__);
 function getQuotes() {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().get('https://api.quotable.io/random').then(function (response) {
     return response.body;
+  });
+}
+function getAllJournalPosts() {
+  return superagent__WEBPACK_IMPORTED_MODULE_0___default().get('/api/v1/journal').then(function (res) {
+    return res.body;
   });
 }
 
@@ -134,7 +140,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api */ "./client/api.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api */ "./client/api/index.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }

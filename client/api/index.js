@@ -7,3 +7,9 @@ export function getQuotes () {
         return response.body
     })
 }
+
+export function getAllJournalPosts () {
+    return request
+    .get('/api/v1/journal')
+    .then(res => res.body)
+}
