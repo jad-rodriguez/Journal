@@ -1,4 +1,5 @@
 import request from 'superagent'
+import { receiveEntries } from '../actions'
 
 export function getQuotes () {
     return request
@@ -8,8 +9,14 @@ export function getQuotes () {
     })
 }
 
-export function getAllJournalPosts () {
-    return request
-    .get('/api/v1/journal')
-    .then(res => res.body)
+export function fetchAllJournalPosts () {
+    return (dispatch) => {
+        return request
+            .get('/api/v1/journal')
+            .then(res => {
+                dispatch(receiveEntries(res.body))
+            })
+   
+        }
+   
 }
