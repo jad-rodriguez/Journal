@@ -7,10 +7,10 @@ export const SAVE_ENTRY = 'SAVE_ENTRY'
 
 // ACTIONS
 
-export function receiveEntries (entries) {
+export function receiveEntries (entriesArr) {
     return {
         type: RECEIVE_ENTRIES,
-        entries: entries
+        entries: entriesArr
     }
 }
 
@@ -26,8 +26,8 @@ export function saveEntry(newEntryObj) {
 export function getAllEntries() {
     return (dispatch) => {
         fetchAllJournalPosts()
-        .then(entryArr => {
-            dispatch(receiveEntries(entryArr))
+        .then(entriesArr => {
+            dispatch(receiveEntries(entriesArr))
         })
         .catch(err => {
             res.status(500).json({ error: err.message })

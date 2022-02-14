@@ -13,7 +13,7 @@ export function fetchAllJournalPosts () {
     return request
         .get('/api/v1/journal')
         .then(response => {
-             response.body
+            return response.body
         })
 }
 
