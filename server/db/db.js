@@ -6,17 +6,19 @@ function getJournalPosts () {
     .select()
 }
 
-// function addJournalEntry (newEntry) {
-//     return db('Posts')
-//     .insert(newEntry)
-// }
+function addJournalEntry (newEntry) {
+    return db('Posts')
+    .insert(newEntry)
+}
 
-// function getEntryById (newId) {
-//     return db('Posts')
-//     .select()
-//     .where('id', newId)
-// }
+function getEntryById (newId) {
+    return db('Posts')
+    .select()
+    .where('id', newId)
+}
 
 module.exports = {
     getJournalPosts,
+    addJournalEntry,
+    getEntryById
 }

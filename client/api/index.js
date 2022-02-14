@@ -15,8 +15,13 @@ export function fetchAllJournalPosts () {
             .get('/api/v1/journal')
             .then(res => {
                 dispatch(receiveEntries(res.body))
-            })
-   
-        }
-   
+        })
+    }
+}
+
+export function saveJournalEntryAPI(newEntryObj) {
+    return request.post('/api/v1/journal')
+    .send(response => {
+        return response.body
+    })
 }

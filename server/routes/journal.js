@@ -14,4 +14,19 @@ router.get('/', (req, res) => {
     })
 })
 
+router.post('/', (req, res) => {
+    const newEntry = req.body
+    db.addJournalEntry(newEntry)
+    .then(entryIdArr => {
+        const newId = entryIdArr[0]
+        db.getEntryById(newId)
+        .then(returnEntry => {
+            res.json(returnEntry)
+        })
+        .catch(err => {
+            res.status(500).json({ error: err.message })
+        })
+    })
+})
+
 module.exports = router
