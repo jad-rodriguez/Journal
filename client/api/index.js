@@ -19,7 +19,8 @@ export function fetchAllJournalPosts () {
 
 export function saveJournalEntryAPI(newEntryObj) {
     return request.post('/api/v1/journal')
-    .send(response => {
+    .send(newEntryObj)
+    .then(response => {
         return response.body
     })
 }
