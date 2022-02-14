@@ -10,13 +10,11 @@ export function getQuotes () {
 }
 
 export function fetchAllJournalPosts () {
-    return (dispatch) => {
-        return request
-            .get('/api/v1/journal')
-            .then(res => {
-                dispatch(receiveEntries(res.body))
+    return request
+        .get('/api/v1/journal')
+        .then(response => {
+             response.body
         })
-    }
 }
 
 export function saveJournalEntryAPI(newEntryObj) {
