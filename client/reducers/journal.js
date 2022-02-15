@@ -7,7 +7,7 @@ function journalPosts (state = [], action) {
 
         case SAVE_ENTRY:
             const allIds = state.map(entries => entries.id)
-            const maxId = Match.max(...allIds)
+            const maxId = Math.max(...allIds)
             return [...state, { id: maxId + 1, newEntryData: action.entryData}]
         default:
             return state

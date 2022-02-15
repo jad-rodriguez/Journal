@@ -1,6 +1,6 @@
 // VARIABLES
 
-import { fetchAllJournalPosts } from "../api"
+import { fetchAllJournalPosts, saveJournalEntryAPI } from "../api"
 
 export const RECEIVE_ENTRIES = 'RECEIVE_ENTRIES'
 export const SAVE_ENTRY = 'SAVE_ENTRY'
@@ -29,15 +29,12 @@ export function getAllEntries() {
         .then(entriesArr => {
             dispatch(receiveEntries(entriesArr))
         })
-        .catch(err => {
-            res.status(500).json({ error: err.message })
-        })
     }
 }
 
 export function addNewEntry(newEntryObj) {
     return (dispatch) => {
-        saveEntry(newEntryObj)
+        saveJournalEntryAPI(newEntryObj)
         .then((entryFromDb) => {
             dispatch(saveEntry(entryFromDb))
         })

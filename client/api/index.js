@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { receiveEntries } from '../actions'
+
 
 export function getQuotes () {
     return request

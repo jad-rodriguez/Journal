@@ -10,6 +10,16 @@ function ShowEntries() {
         dispatch(getAllEntries())
     }, [])
 
+    // This block can convert date to a 'Sun, 02 May 54094 11:04:16' GMT format
+    // const convertDate = (num) => {
+    //     if (num === NaN) {
+    //       return num
+    //     }
+    //     else {
+    //     var date = new Date(num * 1000)
+    //       return date.toUTCString() }
+    //   }
+
     return (
         <>
         <h1>Here are your Journal Entries</h1>
