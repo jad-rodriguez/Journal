@@ -4,6 +4,8 @@ import { useDispatch , useSelector} from 'react-redux'
 import { addNewEntry } from '../actions'
 
 function Journal () {
+  const token = useSelector(globalState => globalState.user.token)
+  
   // const [dateCreated, setDateCreated] = useState(new Date())  
   const [title, setTitle] = useState('')
   const [newEntry, setNewEntry] = useState('')
@@ -20,7 +22,7 @@ function Journal () {
       paragraphs: newEntry
     }
 
-    dispatch(addNewEntry(newEntryObj))
+    dispatch(addNewEntry(newEntryObj, token))
     // setDateCreated(new Date())
     setTitle('')
     setNewEntry('')
@@ -42,7 +44,7 @@ function Journal () {
             <input type="text" className="entry-field" id="journalEntry" value={newEntry} onChange={e => setNewEntry(e.target.value)} />
           </div>
           <div>
-            <button>Save</button>
+            <button className="button-56" role="button">Save</button>
           </div>
         </form>
       </div>

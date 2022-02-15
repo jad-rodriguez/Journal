@@ -16,15 +16,16 @@ function Home () {
       <div>
         <div>
           <Link to='/journal'>
-            <button>Write something today!</button>
+            <button className="button-56" role="button">Write something today!</button>
           </Link>
         </div>
-       
+       <br />
         <div>
           <Link to='/entries'>
-            <button onClick={() => dispatch(getAllEntries())}>Show Your Journal Entries</button>
+            <button className="button-56" role="button" onClick={() => dispatch(getAllEntries())}>Show Your Journal Entries</button>
           </Link>
         </div> 
+        <br />
         <div>
           <Quotes />
         </div>
