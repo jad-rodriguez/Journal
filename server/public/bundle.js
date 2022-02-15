@@ -40,16 +40,12 @@ function getAllEntries() {
   return function (dispatch) {
     (0,_api__WEBPACK_IMPORTED_MODULE_0__.fetchAllJournalPosts)().then(function (entriesArr) {
       dispatch(receiveEntries(entriesArr));
-    })["catch"](function (err) {
-      res.status(500).json({
-        error: err.message
-      });
     });
   };
 }
 function addNewEntry(newEntryObj) {
   return function (dispatch) {
-    saveEntry(newEntryObj).then(function (entryFromDb) {
+    (0,_api__WEBPACK_IMPORTED_MODULE_0__.saveJournalEntryAPI)(newEntryObj).then(function (entryFromDb) {
       dispatch(saveEntry(entryFromDb));
     });
   };
@@ -72,8 +68,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
-
 
 function getQuotes() {
   return superagent__WEBPACK_IMPORTED_MODULE_0___default().get('https://api.quotable.io/random').then(function (response) {
@@ -186,16 +180,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
 
 
 function Journal() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Welcome to your Journal!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    htmlFor: "calendar",
-    className: "form-label"
-  }, "Today's Date:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    type: "date",
-    id: "mainCalendar",
-    name: "calendar"
+  // const [dateCreated, setDateCreated] = useState(new Date())  
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      title = _useState2[0],
+      setTitle = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      newEntry = _useState4[0],
+      setNewEntry = _useState4[1];
+
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    var newEntryObj = {
+      // created: dateCreated,
+      created: Date.now(),
+      title: title,
+      paragraphs: newEntry
+    };
+    dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_2__.addNewEntry)(newEntryObj)); // setDateCreated(new Date())
+
+    setTitle('');
+    setNewEntry('');
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Welcome to your Journal!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    htmlFor: "title"
+  }, "Title: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    type: "text",
+    id: "title",
+    value: title,
+    onChange: function onChange(e) {
+      return setTitle(e.target.value);
+    }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     htmlFor: "journalEntry",
     className: "form-label"
@@ -203,7 +244,10 @@ function Journal() {
     type: "text",
     className: "entry-field",
     id: "journalEntry",
-    name: "journal"
+    value: newEntry,
+    onChange: function onChange(e) {
+      return setNewEntry(e.target.value);
+    }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Save")))));
 }
 
@@ -339,7 +383,16 @@ function ShowEntries() {
   });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_1__.getAllEntries)());
-  }, []);
+  }, []); // This block can convert date to a 'Sun, 02 May 54094 11:04:16' GMT format
+  // const convertDate = (num) => {
+  //     if (num === NaN) {
+  //       return num
+  //     }
+  //     else {
+  //     var date = new Date(num * 1000)
+  //       return date.toUTCString() }
+  //   }
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Here are your Journal Entries"), entries.map(function (entry) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
       key: entry.id
@@ -403,8 +456,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 function journalPosts() {
-  var _Match;
-
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
@@ -416,9 +467,7 @@ function journalPosts() {
       var allIds = state.map(function (entries) {
         return entries.id;
       });
-
-      var maxId = (_Match = Match).max.apply(_Match, _toConsumableArray(allIds));
-
+      var maxId = Math.max.apply(Math, _toConsumableArray(allIds));
       return [].concat(_toConsumableArray(state), [{
         id: maxId + 1,
         newEntryData: action.entryData
