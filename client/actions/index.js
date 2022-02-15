@@ -47,9 +47,9 @@ export function getAllEntries() {
     }
 }
 
-export function addNewEntry(newEntryObj) {
+export function addNewEntry(newEntryObj, token) {
     return (dispatch) => {
-        saveJournalEntryAPI(newEntryObj)
+        saveJournalEntryAPI(newEntryObj, token)
         .then((entryFromDb) => {
             dispatch(saveEntry(entryFromDb))
         })
