@@ -2,18 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
+import { Nav, Navbar, Container, NavDropdown} from 'react-bootstrap'
 
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
-const NavGroup = styled.nav`
-  float: right;
-`
+// const NavGroup = styled.nav`
+//   float: right;
+// `
 
-const NavLink = styled(Link)`
-  margin-right: 30px;
-`
+// const NavLink = styled(Link)`
+//   margin-right: 30px;
+// `
 
-function Nav () {
+function Navigation () {
   // TODO: call the useAuth0 hook and destructure logout and loginWithRedirect
   const { logout, loginWithRedirect } = useAuth0()
 
@@ -39,7 +40,36 @@ function Nav () {
 
   return (
     <>
-      <NavGroup>
+
+      <Navbar bg="light" expand="lg">
+        <Container>
+          <Navbar.Brand href="#home">Journal</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="/">Home</Nav.Link>
+              <IfAuthenticated>
+                <Nav.Link href="/" onClick={handleLogoff}>Logoff</Nav.Link>
+              </IfAuthenticated>
+              <IfNotAuthenticated>
+                <Nav.Link href="/" onClick={handleRegister}>Register</Nav.Link>
+                <Nav.Link href="/" onClick={handleSignIn}>Sign in</Nav.Link>
+              </IfNotAuthenticated>
+              
+              <NavDropdown title="Journal" id="basic-nav-dropdown">
+                <NavDropdown.Item href="/journal">Write Something</NavDropdown.Item>
+                <NavDropdown.Item href="/entries">Journal</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">Add Later On</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
+
+      {/* <NavGroup>
         <NavLink to='/'><button className="button-56" role="button">Home</button></NavLink>
         <IfAuthenticated>
           <a href='/' onClick={handleLogoff}><button className="button-56" role="button">Logoff</button></a>
@@ -48,12 +78,13 @@ function Nav () {
           <a href='/' onClick={handleRegister}><button className="button-56" role="button">Register</button></a>
           <a href='/' onClick={handleSignIn}><button className="button-56" role="button">Sign in</button></a>
         </IfNotAuthenticated>
-      </NavGroup>
+        <Button variant="primary">Primary</Button>
+      </NavGroup> */}
     </>
   )
 }
 
-export default Nav
+export default Navigation
 
 
 

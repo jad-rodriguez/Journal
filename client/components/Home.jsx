@@ -14,7 +14,7 @@ function Home () {
     <>
       <h1>Welcome to your Journal!</h1>
       <div>
-        <div>
+        {/* <div>
           <Link to='/journal'>
             <button className="button-56" role="button">Write something today!</button>
           </Link>
@@ -25,7 +25,7 @@ function Home () {
             <button className="button-56" role="button" onClick={() => dispatch(getAllEntries())}>Show Your Journal Entries</button>
           </Link>
         </div> 
-        <br />
+        <br /> */}
         <div>
           <Quotes />
         </div>
