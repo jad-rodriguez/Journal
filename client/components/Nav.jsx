@@ -43,7 +43,7 @@ function Navigation () {
 
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">Journal</Navbar.Brand>
+          <Navbar.Brand href="/">Journal</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
