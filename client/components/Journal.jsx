@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
 import { useDispatch , useSelector} from 'react-redux'
+import { Form, Col, Button, Toast, Modal } from 'react-bootstrap'
 
 import { addNewEntry } from '../actions'
 
 function Journal () {
   const token = useSelector(globalState => globalState.user.token)
   
-  // const [dateCreated, setDateCreated] = useState(new Date())  
   const [title, setTitle] = useState('')
   const [newEntry, setNewEntry] = useState('')
-  
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const dispatch = useDispatch()
 
@@ -24,30 +28,43 @@ function Journal () {
 
     dispatch(addNewEntry(newEntryObj, token))
     // setDateCreated(new Date())
+    handleShow()
     setTitle('')
     setNewEntry('')
   }
 
   return (
     <>
-      <h1>Welcome to your Journal!</h1>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div>
-            {/* <label htmlFor="calendar" className="form-label">Today's Date: </label>
-            <input type="date" id="dateCreated" value={dateCreated} onChange={e => setDateCreated(e.target.value)}/> */}
-            <label htmlFor='title'>Title: </label>
-            <input type='text' id='title' value={title} onChange={e => setTitle(e.target.value)} />
-          </div>
-          <div>
-            <label htmlFor="journalEntry" className="form-label">What do you wanna write today?</label>
-            <input type="text" className="entry-field" id="journalEntry" value={newEntry} onChange={e => setNewEntry(e.target.value)} />
-          </div>
-          <div>
-            <button className="button-56" role="button">Save</button>
-          </div>
-        </form>
-      </div>
+      <h3>What do you wanna write today?</h3>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Label>Title</Form.Label>
+            <Form.Control type="text" placeholder="Title" onChange={e => setTitle(e.target.value)}/>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Write here...</Form.Label>
+            <Form.Control as="textarea" rows={8} onChange={e => setNewEntry(e.target.value)}/>
+          </Form.Group>
+
+          <Button variant="primary" onClick={handleSubmit}>
+              Save
+            </Button>
+
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Journal</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Journal entry has been saved!</Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                {/* <Button variant="primary" onClick={handleSubmit, handleClose}>
+                  Save Changes
+                </Button> */}
+              </Modal.Footer>
+            </Modal>
+        </Form>
     </>
   )
 }
