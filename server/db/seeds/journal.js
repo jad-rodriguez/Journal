@@ -9,7 +9,8 @@ exports.seed = (knex) => {
           id: 1, 
           created: new Date(Date.now()), 
           title: 'Welcome to your Journal', 
-          paragraphs: 'This is your space to do some reflections'
+          paragraphs: 'This is your space to do some reflections',
+          added_by_user: 1
         }
       ])
     })

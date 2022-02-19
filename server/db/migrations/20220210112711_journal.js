@@ -5,6 +5,7 @@ exports.up = (knex) => {
         table.date('created')
         table.string('title')
         table.string('paragraphs')
+        table.string('added_by_user').references('users.auth0_id')
   })
 }
 

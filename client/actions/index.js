@@ -4,6 +4,8 @@ import { fetchAllJournalPosts, saveJournalEntryAPI } from "../api"
 
 export const RECEIVE_ENTRIES = 'RECEIVE_ENTRIES'
 export const SAVE_ENTRY = 'SAVE_ENTRY'
+export const SET_USER = 'SET_USER'
+export const CLEAR_USER = 'CLEAR_USER'
 
 // ACTIONS
 
@@ -21,6 +23,19 @@ export function saveEntry(newEntryObj) {
     }
 }
 
+export function setUser (user) {
+  return {
+    type: SET_USER,
+    user
+  }
+}
+
+export function clearUser () {
+  return {
+    type: CLEAR_USER
+  }
+}
+
 // THUNK FUNCTIONS
 
 export function getAllEntries() {
@@ -32,9 +47,9 @@ export function getAllEntries() {
     }
 }
 
-export function addNewEntry(newEntryObj) {
+export function addNewEntry(newEntryObj, token) {
     return (dispatch) => {
-        saveJournalEntryAPI(newEntryObj)
+        saveJournalEntryAPI(newEntryObj, token)
         .then((entryFromDb) => {
             dispatch(saveEntry(entryFromDb))
         })
