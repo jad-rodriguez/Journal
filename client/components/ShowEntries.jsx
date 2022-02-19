@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { getAllEntries } from '../actions'
 import { useSelector, useDispatch } from 'react-redux'
+import { Container, Row, Col } from 'react-bootstrap'
 
 function ShowEntries() {
     const dispatch = useDispatch()
@@ -22,20 +23,26 @@ function ShowEntries() {
 
     return (
         <>
-        <h1>Here are your Journal Entries</h1>
-        {entries.map((entry) => {
-            return <ul>
-                <li key={entry.id}>
-                {new Intl.DateTimeFormat("en-GB", {
-                    year: "numeric",
-                    month: "long",
-                    day: "2-digit"
-                }).format(entry.created)} - {entry.title}
-                    {/* {entry.created} - {entry.title} */}
-                </li>
-                <p>{entry.paragraphs}</p>
-            </ul>
-        })}
+        <Container fluid="md">
+            <Row>
+                <h1>Here are your Journal Entries</h1>
+            </Row>
+            <Row>
+                {entries.map((entry) => {
+                return <ul>
+                    <li key={entry.id}>
+                    {new Intl.DateTimeFormat("en-GB", {
+                        year: "numeric",
+                        month: "long",
+                        day: "2-digit"
+                    }).format(entry.created)} - {entry.title}
+                        {/* {entry.created} - {entry.title} */}
+                    </li>
+                    <p>{entry.paragraphs}</p>
+                </ul>
+                })} 
+            </Row>
+        </Container>
         </>
     )
 }
