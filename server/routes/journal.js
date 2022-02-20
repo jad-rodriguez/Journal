@@ -38,4 +38,19 @@ router.post('/', checkJwt, (req, res) => {
     })
 })
 
+router.patch('/:id', (req, res) => {
+    const entry = req.body
+    const id = req.params.id
+    db.updateJournalEntry(entry, id)
+    .then (() => {
+        db.getEntryById(id)
+        .then(selectedEntry => {
+            res.json(selectedEntry)
+        })
+        .catch(err => {
+            res.status(500).json({ error: err.message })
+        })
+    })
+})
+
 module.exports = router

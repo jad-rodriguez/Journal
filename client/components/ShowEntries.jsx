@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
-import { getAllEntries } from '../actions'
+import { getAllEntries, patchEntry } from '../actions'
 import { useSelector, useDispatch } from 'react-redux'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button, Stack, Table } from 'react-bootstrap'
 
 function ShowEntries() {
     const dispatch = useDispatch()
     const entries = useSelector(state => state.journal)
+
+    // const [updatedEntry, setUpdatedEntry] = useState()
     
     useEffect(() => {
         dispatch(getAllEntries())
@@ -25,22 +27,47 @@ function ShowEntries() {
         <>
         <Container fluid="md">
             <Row>
-                <h1>Here are your Journal Entries</h1>
+                <h3>Here are your Journal Entries</h3>
             </Row>
             <Row>
-                {entries.map((entry) => {
-                return <ul>
-                    <li key={entry.id}>
-                    {new Intl.DateTimeFormat("en-GB", {
-                        year: "numeric",
-                        month: "long",
-                        day: "2-digit"
-                    }).format(entry.created)} - {entry.title}
-                        {/* {entry.created} - {entry.title} */}
-                    </li>
-                    <p>{entry.paragraphs}</p>
-                </ul>
-                })} 
+                <Col>
+                    {/* {entries.map((entry) => { */}
+                    {/* return */}
+                        <Table striped hover>
+                        <thead>
+                            <tr>
+                            <th>Date</th>
+                            <th>Title</th>
+                            <th>Journal Entry</th>
+                            </tr>
+                        </thead>
+                        {entries.map((entry) => { return <tbody>
+                            <tr>
+                            <td>{new Intl.DateTimeFormat("en-GB", {
+                            year: "numeric",
+                            month: "long",
+                            day: "2-digit"
+                            }).format(entry.created)}</td>
+                            <td>{entry.title}</td>
+                            <td>{entry.paragraphs}</td>                           
+                            </tr>
+                        </tbody> })} 
+                        </Table>
+                     {/* <ul>
+                         <li key={entry.id}><strong>Date Created:</strong> {new Intl.DateTimeFormat("en-GB", {
+                             year: "numeric",
+                             month: "long",
+                             day: "2-digit"
+                         }).format(entry.created)}
+                         <p>
+                             <strong>Journal Title:</strong> {entry.title}
+                         </p>
+                             {entry.created} - {entry.title}
+                         </li>
+                         <p>{entry.paragraphs}</p>
+                     </ul>
+                     })}  */}
+                </Col>
             </Row>
         </Container>
         </>

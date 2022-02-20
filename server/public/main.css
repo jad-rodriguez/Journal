@@ -1,104 +1,45 @@
 body {
   background-color: rgb(191, 212, 216);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-/* button {
-  height: 38px;
-  width: 243px;
-  border-radius: 20px;
-  background-color: #00CB79;
-} */
-
-/* <!-- HTML !-->
-<button class="button-56" role="button">Button 56</button> */
-
-/* CSS  button style */
-.button-56 {
-  align-items: center;
-  background-color: #e3f3fe;
-  border: 2px solid #111;
-  border-radius: 8px;
-  box-sizing: border-box;
-  color: #111;
-  cursor: pointer;
-  display: flex;
-  font-family: Inter,sans-serif;
-  font-size: 16px;
-  height: 48px;
   justify-content: center;
-  line-height: 24px;
-  max-width: 100%;
-  padding: 0 25px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
 }
 
-.button-56:after {
-  background-color: #111;
-  border-radius: 8px;
-  content: "";
-  display: block;
-  height: 48px;
-  left: 0;
-  width: 100%;
-  position: absolute;
-  top: -2px;
-  transform: translate(8px, 8px);
-  transition: transform .2s ease-out;
-  z-index: -1;
+h1,
+h3 {
+  color: rgb(50, 50, 50);
 }
 
-.button-56:hover:after {
-  transform: translate(0, 0);
+h1 {
+  font-size: 50px;
+  margin: 15px;
 }
 
-.button-56:active {
-  background-color: #e3f3fe;
-  outline: 0;
+h3 {
+  opacity: 0.6;
+  font-weight: 600;
+  margin-bottom: 0px;
 }
 
-.button-56:hover {
-  outline: 0;
-}
-
-@media (min-width: 768px) {
-  .button-56 {
-    padding: 0 40px;
+@media (max-width: 320px) {
+  body {
+    background-color: #a1afff;
   }
 }
 
-/* -------- */
-
-.calendar {
-  background: none;
-  font-size: 18px;
-  padding: 10px 10px 10px 5px;
-  display: block;
-  border: none;
-  border-radius: 0;
-  border-bottom: 1px
+@media (min-width: 321px) and (max-width: 768px) {
+  body {
+    background-color: #eaff9e;
+  }
 }
 
-.entry-field {
-  display: flex;
-  background: none;
-  font-size: 18px;
-  display: block;
-  border: none;
-  border-radius: 10;
-  border-bottom: 1px;
-  width: 550px;
-  height: 450px;
-  margin: auto;
-  position: relative;
+@media (min-width: 769px) and (max-width: 2199px) {
+  body {
+    background-color: #95ffec;
+  }
 }
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
+@media (min-width: 1200px) {
+  body {
+    background-color: #311847;
+  }
 }
