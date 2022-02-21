@@ -27,6 +27,15 @@ export function saveJournalEntryAPI(newEntryObj, token) {
     .catch(logError)
 }
 
+export function patchJournalEntry(entry) {
+    return request.patch(`/api/v1/journal/${entry.id}`)
+    .send(entry)
+    .then(res => {
+      return res.body
+    })
+    .catch(logError)
+}
+
 export async function addUser (user) {
     return request.post('api/v1/users')
       .send(user)

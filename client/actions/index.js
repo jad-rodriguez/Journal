@@ -1,9 +1,10 @@
 // VARIABLES
 
-import { fetchAllJournalPosts, saveJournalEntryAPI } from "../api"
+import { fetchAllJournalPosts, patchJournalEntry, saveJournalEntryAPI } from "../api"
 
 export const RECEIVE_ENTRIES = 'RECEIVE_ENTRIES'
 export const SAVE_ENTRY = 'SAVE_ENTRY'
+export const UPDATE_ENTRY = 'UPDATE_ENTRY'
 export const SET_USER = 'SET_USER'
 export const CLEAR_USER = 'CLEAR_USER'
 
@@ -20,6 +21,14 @@ export function saveEntry(newEntryObj) {
     return {
         type: SAVE_ENTRY,
         entryData: newEntryObj
+    }
+}
+
+export function updateEntry(id, newEntryObj) {
+    return {
+        type: UPDATE_ENTRY,
+        id,
+        newEntryObj
     }
 }
 
@@ -52,6 +61,15 @@ export function addNewEntry(newEntryObj, token) {
         saveJournalEntryAPI(newEntryObj, token)
         .then((entryFromDb) => {
             dispatch(saveEntry(entryFromDb))
+        })
+    }
+}
+
+export function patchEntry(entry, token) {
+    return (dispatch) => {
+        patchJournalEntry(entry, token)
+        .then((newEntryObj) => {
+            dispatch(updateEntry(id, newEntryObj))
         })
     }
 }

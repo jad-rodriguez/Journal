@@ -17,8 +17,16 @@ function getEntryById (newId) {
     .where('id', newId)
 }
 
+function updateJournalEntry (entry, id) {
+    return db('Posts')
+    .select()
+    .where('id', id)
+    .update(entry)
+}
+
 module.exports = {
     getJournalPosts,
     addJournalEntry,
-    getEntryById
+    getEntryById,
+    updateJournalEntry
 }
